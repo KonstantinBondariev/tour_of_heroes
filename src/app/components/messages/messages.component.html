@@ -1,0 +1,6 @@
+<h3>Messages:</h3>
+
+<div *ngIf="messageService.messages.length">
+  <div *ngFor="let message of messageService.messages">{{message}}</div>
+  <button mat-button type="button" (click)="messageService.clear()">Clear</button>
+</div>

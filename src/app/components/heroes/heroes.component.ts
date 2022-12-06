@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HEROES } from 'src/app/shared/data/mock-heroes';
+import { HeroService } from 'src/app/shared/services/hero.service';
 import { HeroInterface } from 'src/app/shared/types/hero-interface';
 
 @Component({
@@ -15,11 +16,27 @@ export class HeroesComponent implements OnInit {
 
   selectedHero!: HeroInterface;
 
-  heroes: HeroInterface[] = HEROES;
+  heroes!: HeroInterface[];
 
-  constructor() {}
+  constructor(private heroService: HeroService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getHeroes();
+    // HEROES.forEach((hero) => {
+    //   this.heroService.createData(hero);
+    // });
+  }
+
+  getHeroes(): any {
+    this.heroService.getData().subscribe({
+      next: (res: any[]) => {
+        this.heroes = res;
+        console.log('get data ');
+      },
+      error: (err) => console.error(err),
+    });
+    console.log(this.heroes);
+  }
 
   onSelect(hero: HeroInterface): void {
     this.selectedHero = hero;

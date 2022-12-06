@@ -8,14 +8,19 @@ import { MatButtonModule } from '@angular/material/button';
 import { HeroesComponent } from './components/heroes/heroes.component';
 import { FormsModule } from '@angular/forms';
 import { HeroDetailComponent } from './components/hero-detail/hero-detail.component';
+import { HttpClientModule } from '@angular/common/http';
+import { MessagesComponent } from './components/messages/messages.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
-  declarations: [AppComponent, HeroesComponent, HeroDetailComponent],
+  declarations: [AppComponent, HeroesComponent, HeroDetailComponent, MessagesComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     MatButtonModule,
     FormsModule,
+    HttpClientModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
