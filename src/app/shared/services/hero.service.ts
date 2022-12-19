@@ -40,4 +40,14 @@ export class HeroService {
       })
     );
   }
+
+  getHero(id: any): Observable<HeroInterface> {
+    // return this.http.get<any>(`${url}.json`)
+
+    this.messagesService.add(`HeroService: fetched hero id=${id}`);
+    return of(HEROES.find((hero) => hero.id === id));
+  }
+}
+function of(arg0: HeroInterface | undefined): Observable<HeroInterface> {
+  throw new Error('Function not implemented.');
 }

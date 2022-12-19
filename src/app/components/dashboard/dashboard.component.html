@@ -1,0 +1,8 @@
+<h3>Top heroes</h3>
+<div>
+  <a *ngFor="let hero of heroes" routerLink="/detail/{{hero.id}}">
+    <div>
+      <h4>{{hero.name}}</h4>
+    </div>
+  </a>
+</div>

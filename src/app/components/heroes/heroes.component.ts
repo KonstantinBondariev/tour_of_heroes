@@ -32,13 +32,9 @@ export class HeroesComponent implements OnInit {
       next: (res: any[]) => {
         this.heroes = res;
         console.log('get data ');
+        console.log(this.heroes);
       },
       error: (err) => console.error(err),
     });
-    console.log(this.heroes);
-  }
-
-  onSelect(hero: HeroInterface): void {
-    this.selectedHero = hero;
   }
 }
