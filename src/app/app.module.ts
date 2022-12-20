@@ -11,9 +11,16 @@ import { HeroDetailComponent } from './components/hero-detail/hero-detail.compon
 import { HttpClientModule } from '@angular/common/http';
 import { MessagesComponent } from './components/messages/messages.component';
 import { AppRoutingModule } from './app-routing.module';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
-  declarations: [AppComponent, HeroesComponent, HeroDetailComponent, MessagesComponent],
+  declarations: [
+    AppComponent,
+    HeroesComponent,
+    HeroDetailComponent,
+    MessagesComponent,
+    DashboardComponent,
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

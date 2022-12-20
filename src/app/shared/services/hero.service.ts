@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HEROES } from '../data/mock-heroes';
 import { HeroInterface } from '../types/hero-interface';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable, tap } from 'rxjs';
+import { map, Observable, of, tap } from 'rxjs';
 import { HeroResponse } from '../types/hero-response';
 import { MessageService } from './message.service';
 
@@ -20,8 +20,10 @@ export class HeroService {
 
   heroes!: HeroInterface[];
 
-  getHeroes(): HeroInterface[] {
-    return HEROES;
+  getHeroes(): Observable<HeroInterface[]> {
+    // TODO: send the message _after_ fetching the heroes
+    this.messagesService.add('HeroService: fetched heroes');
+    return of(HEROES);
   }
 
   createData(hero: HeroInterface): void {
@@ -40,4 +42,24 @@ export class HeroService {
       })
     );
   }
+
+  getHero(id: any): Observable<HeroInterface | undefined> {
+    return this.http.get<any>(`${url}.json`).pipe(
+      map((res) => {
+        if (res) this.messagesService.add('HeroService: fetched hero id=${id}');
+        const arr: HeroInterface[] = [];
+        console.log(res);
+
+        Object.keys(res).forEach((key) => {
+          arr.push({ key, ...res[key] });
+        });
+        return arr.find((hero) => hero.id == id);
+      })
+    );
+  }
+  // getHero(id: number): Observable<any> {
+  //   // TODO: send the message _after_ fetching the hero
+  //   this.messagesService.add(`HeroService: fetched hero id=${id}`);
+  //   return of(HEROES.find((hero) => hero.id === id));
+  // }
 }

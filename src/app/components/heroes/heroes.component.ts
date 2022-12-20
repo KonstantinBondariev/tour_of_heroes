@@ -14,7 +14,7 @@ export class HeroesComponent implements OnInit {
     name: 'Windstorm',
   };
 
-  selectedHero!: HeroInterface;
+  // selectedHero!: HeroInterface; delete
 
   heroes!: HeroInterface[];
 
@@ -38,7 +38,7 @@ export class HeroesComponent implements OnInit {
     console.log(this.heroes);
   }
 
-  onSelect(hero: HeroInterface): void {
-    this.selectedHero = hero;
-  }
+  // onSelect(hero: HeroInterface): void {
+  //   this.selectedHero = hero;
+  // } delete
 }
