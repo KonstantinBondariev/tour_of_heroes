@@ -1,10 +1,21 @@
 <h2>My Herroes</h2>
+
+<div>
+  <label>Hero name:
+    <input [(ngModel)]="heroName">
+  </label>
+  <button (click)="addHero(heroName); heroName=''" [disabled]="!heroName">
+    Add a new Hero
+  </button>
+</div>
+
 <div>
   <ul>
     <li *ngFor="let hero of heroes">
       <a routerLink="/detail/{{hero.id}}">
         <span>{{hero.id}}</span> {{hero.name}}
       </a>
+      <button title="delete hero" (click)="deleteHero(hero)">x</button>
     </li>
   </ul>
 </div>

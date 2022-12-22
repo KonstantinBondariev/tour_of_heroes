@@ -14,9 +14,13 @@ export class HeroesComponent implements OnInit {
     name: 'Windstorm',
   };
 
+  cureantId!: number;
+
   // selectedHero!: HeroInterface; delete
 
   heroes!: HeroInterface[];
+
+  heroName!: string;
 
   constructor(private heroService: HeroService) {}
 
@@ -31,14 +35,36 @@ export class HeroesComponent implements OnInit {
     this.heroService.getData().subscribe({
       next: (res: any[]) => {
         this.heroes = res;
-        console.log('get data ');
+        let arrID: number[] = [];
+        res.forEach((hero) => {
+          arrID.push(hero.id);
+        });
+        this.cureantId = Math.max(...arrID);
+        console.log(this.cureantId);
       },
       error: (err) => console.error(err),
     });
-    console.log(this.heroes);
   }
 
-  // onSelect(hero: HeroInterface): void {
-  //   this.selectedHero = hero;
-  // } delete
+  addHero(heroName: string): void {
+    this.heroService
+      .createData(this.createNewHero(heroName))
+      .subscribe((res) => {
+        if (res) {
+          this.getHeroes();
+        }
+      });
+  }
+
+  deleteHero(hero: HeroInterface): void {
+    this.heroes = this.heroes.filter((h) => h !== hero);
+    this.heroService.deleteHero(hero).subscribe();
+  }
+
+  private createNewHero(heroName: string): HeroInterface {
+    return {
+      id: this.cureantId + 1,
+      name: heroName,
+    };
+  }
 }
