@@ -13,13 +13,10 @@
   width: 100%;
   display: flex;
 
-  &__heroes {
-    flex-grow: 1;
-  }
+  flex-grow: 1;
 }
 .messges {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   right: 0;
-  background-color: blue;
 }
