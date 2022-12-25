@@ -1,12 +1,19 @@
 <div class="container">
-  <h1>{{title}}</h1>
+  <div class="menu">
+    <h1>{{title}}</h1>
+    <nav>
+      <a routerLink="/heroes" mat-button>Heroes</a>
+      <a routerLink="/dashboard" mat-button>Dashboard</a>
+    </nav>
+  </div>
 
-  <nav>
-    <a routerLink="/heroes">Heroes</a>
-    <a routerLink="/dashboard">Dashboard</a>
+  <div class="content">
+    <div class="content__heroes">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
 
-  </nav>
-
-  <router-outlet></router-outlet>
+<div class="messges">
   <app-messages></app-messages>
 </div>

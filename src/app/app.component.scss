@@ -1,3 +1,25 @@
 .container {
   margin: 20px;
+  position: relative;
+  min-height: calc(100vh - 40px);
+  background-color: aqua;
+}
+.menu {
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+}
+.content {
+  width: 100%;
+  display: flex;
+
+  &__heroes {
+    flex-grow: 1;
+  }
+}
+.messges {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: blue;
 }

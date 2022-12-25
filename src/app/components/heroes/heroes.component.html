@@ -1,21 +1,24 @@
-<h2>My Herroes</h2>
+<div class="container">
+  <h2>My Herroes</h2>
+  <mat-form-field class="example-full-width">
+    <div>
+      <mat-label>Add a new hero</mat-label>
+      <input [(ngModel)]="heroName" matInput placeholder="Hero name">
+    </div>
+  </mat-form-field>
 
-<div>
-  <label>Hero name:
-    <input [(ngModel)]="heroName">
-  </label>
-  <button (click)="addHero(heroName); heroName=''" [disabled]="!heroName">
+  <button (click)="addHero(heroName); heroName=''" [disabled]="!heroName" mat-button>
     Add a new Hero
   </button>
-</div>
 
-<div>
-  <ul>
-    <li *ngFor="let hero of heroes">
-      <a routerLink="/detail/{{hero.id}}">
-        <span>{{hero.id}}</span> {{hero.name}}
-      </a>
-      <button title="delete hero" (click)="deleteHero(hero)">x</button>
-    </li>
-  </ul>
+  <div>
+    <mat-list role="list" class="list">
+      <mat-list-item role="listitem" *ngFor="let hero of heroes" class="list__item">
+        <a routerLink="/detail/{{hero.id}}">
+          <span>{{hero.id}}</span> {{hero.name}}
+        </a>
+        <button title="delete hero" (click)="deleteHero(hero)" mat-icon-button>x</button>
+      </mat-list-item>
+    </mat-list>
+  </div>
 </div>

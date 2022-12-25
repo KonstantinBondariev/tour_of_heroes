@@ -1,0 +1,18 @@
+.container {
+  min-width: 66.666%;
+  flex-grow: 2;
+}
+
+.list {
+  width: 300px;
+  &__item {
+    margin: 0.2rem 0;
+    background-color: bisque;
+    border-radius: 2px;
+  }
+}
+
+.mat-list-item-content {
+  display: flex !important  ;
+  justify-content: space-between !important;
+}

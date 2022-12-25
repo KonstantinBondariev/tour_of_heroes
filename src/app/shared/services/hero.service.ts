@@ -80,15 +80,26 @@ export class HeroService {
     );
   }
 
-  searchHeroes(term: string): Observable<HeroInterface[]> {
+  searchHeroes(term: string): Observable<any[]> {
     if (!term.trim()) {
       // if not search term, return empty hero array.
       return of([]);
     }
-    return this.http.get<HeroInterface[]>(`${url}/?key=${term}`).pipe(
-      tap((_) => this.log(`found heroes matching "${term}"`)),
-      catchError(this.handleError<HeroInterface[]>('searchHeroes', []))
-    );
+    return this.http
+      .get<any>(`${url}`)
+      .pipe(
+        tap((_) => this.log(`found heroes matching "${term}"`)),
+        catchError(this.handleError<HeroInterface[]>('searchHeroes', []))
+      )
+      .pipe(
+        map((res) => {
+          const arr: any[] = [];
+          Object.keys(res).forEach((key) => {
+            arr.push({ key, ...res[key] });
+          });
+          return arr;
+        })
+      );
   }
 
   private log(message: string): void {

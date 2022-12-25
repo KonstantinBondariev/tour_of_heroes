@@ -14,6 +14,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HeroSearchComponent } from './components/hero-search/hero-search.component';
 
+import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,6 +34,9 @@ import { HeroSearchComponent } from './components/hero-search/hero-search.compon
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
+    MatInputModule,
+    MatListModule,
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
