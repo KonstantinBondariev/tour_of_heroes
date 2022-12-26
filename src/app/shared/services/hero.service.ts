@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { HEROES } from '../data/mock-heroes';
 import { HeroInterface } from '../types/hero-interface';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, Observable, of, tap, catchError } from 'rxjs';
@@ -23,9 +22,9 @@ export class HeroService {
 
   heroes!: HeroInterface[];
 
-  createData(hero: HeroInterface): Observable<any> {
+  createData(hero: HeroInterface): Observable<HeroInterface> {
     return this.http.post(`${url}.json`, hero).pipe(
-      tap((_) => this.log(`Created hero id=${hero.id}`)),
+      tap<any>((_) => this.log(`Created hero id=${hero.id}`)),
       catchError(this.handleError<HeroInterface>('createHero'))
     );
   }
@@ -66,40 +65,20 @@ export class HeroService {
       );
   }
 
-  updateHero(hero: any): Observable<any> {
-    return this.http.put(`${url}/${hero.key}.json`, hero, httpOptions).pipe(
-      tap((_) => this.log(`updated hero id=${hero.id}`)),
-      catchError(this.handleError<any>('updateHero'))
-    );
+  updateHero(hero: HeroInterface): Observable<HeroInterface> {
+    return this.http
+      .put<any>(`${url}/${hero.key}.json`, hero, httpOptions)
+      .pipe(
+        tap((_) => this.log(`updated hero id=${hero.id}`)),
+        catchError(this.handleError<HeroInterface>('updateHero'))
+      );
   }
 
-  deleteHero(hero: any): Observable<any> {
-    return this.http.delete(`${url}/${hero.key}.json`, httpOptions).pipe(
+  deleteHero(hero: HeroInterface): Observable<HeroInterface> {
+    return this.http.delete<any>(`${url}/${hero.key}.json`, httpOptions).pipe(
       tap((_) => this.log(`deleted hero id=${hero.id}`)),
       catchError(this.handleError<HeroInterface>('deleteHero'))
     );
-  }
-
-  searchHeroes(term: string): Observable<any[]> {
-    if (!term.trim()) {
-      // if not search term, return empty hero array.
-      return of([]);
-    }
-    return this.http
-      .get<any>(`${url}`)
-      .pipe(
-        tap((_) => this.log(`found heroes matching "${term}"`)),
-        catchError(this.handleError<HeroInterface[]>('searchHeroes', []))
-      )
-      .pipe(
-        map((res) => {
-          const arr: any[] = [];
-          Object.keys(res).forEach((key) => {
-            arr.push({ key, ...res[key] });
-          });
-          return arr;
-        })
-      );
   }
 
   private log(message: string): void {
@@ -114,10 +93,8 @@ export class HeroService {
    */
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
 
-      // TODO: better job of transforming error for user consumption
       this.log(`${operation} failed: ${error.message}`);
 
       // Let the app keep running by returning an empty result.

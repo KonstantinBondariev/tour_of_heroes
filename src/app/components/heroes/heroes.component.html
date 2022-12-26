@@ -1,15 +1,18 @@
 <div class="container">
-  <h2>My Herroes</h2>
-  <mat-form-field class="example-full-width">
-    <div>
-      <mat-label>Add a new hero</mat-label>
-      <input [(ngModel)]="heroName" matInput placeholder="Hero name">
-    </div>
-  </mat-form-field>
+  <h2>My Heroes</h2>
 
-  <button (click)="addHero(heroName); heroName=''" [disabled]="!heroName" mat-button>
-    Add a new Hero
-  </button>
+  <div class="input-new-hero">
+    <mat-form-field class="example-full-width">
+      <div>
+        <mat-label>Add a new hero</mat-label>
+        <input [(ngModel)]="heroName" matInput placeholder="Hero name">
+      </div>
+    </mat-form-field>
+
+    <button (click)="addHero(heroName); heroName=''" [disabled]="!heroName" mat-button>
+      Add a new Hero
+    </button>
+  </div>
 
   <div>
     <mat-list role="list" class="list">

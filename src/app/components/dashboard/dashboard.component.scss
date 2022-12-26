@@ -3,4 +3,9 @@
 }
 .cards {
   display: flex;
+  & a {
+    margin: 0 5px;
+    text-decoration: none;
+    color: black;
+  }
 }

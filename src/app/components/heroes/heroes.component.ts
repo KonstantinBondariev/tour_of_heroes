@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HEROES } from 'src/app/shared/data/mock-heroes';
 import { HeroService } from 'src/app/shared/services/hero.service';
 import { HeroInterface } from 'src/app/shared/types/hero-interface';
 
@@ -15,32 +14,24 @@ export class HeroesComponent implements OnInit {
   };
 
   cureantId!: number;
-
-  // selectedHero!: HeroInterface; delete
-
   heroes!: HeroInterface[];
-
   heroName!: string;
 
   constructor(private heroService: HeroService) {}
 
   ngOnInit(): void {
     this.getHeroes();
-    // HEROES.forEach((hero) => {
-    //   this.heroService.createData(hero);
-    // });
   }
 
-  getHeroes(): any {
+  getHeroes(): void {
     this.heroService.getData().subscribe({
-      next: (res: any[]) => {
+      next: (res: HeroInterface[]) => {
         this.heroes = res;
         let arrID: number[] = [];
         res.forEach((hero) => {
           arrID.push(hero.id);
         });
         this.cureantId = Math.max(...arrID);
-        console.log(this.cureantId);
       },
       error: (err) => console.error(err),
     });

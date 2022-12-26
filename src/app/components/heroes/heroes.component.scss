@@ -3,12 +3,19 @@
   flex-grow: 2;
 }
 
+.input-new-hero {
+  display: flex;
+}
+
 .list {
   width: 300px;
   &__item {
     margin: 0.2rem 0;
-    background-color: bisque;
     border-radius: 2px;
+    & a {
+      text-decoration: none;
+      color: black;
+    }
   }
 }
 

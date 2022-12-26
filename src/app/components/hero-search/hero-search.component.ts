@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
 import { HeroService } from 'src/app/shared/services/hero.service';
-import { HeroInterface } from 'src/app/shared/types/hero-interface';
-import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { debounce } from 'lodash';
 @Component({
   selector: 'app-hero-search',
@@ -20,8 +17,11 @@ export class HeroSearchComponent implements OnInit {
 
   search(value: string): void {
     this.heroService.getData().subscribe((res) => {
-      this.heroes$ = res.filter((hero) => hero.name.includes(value));
-      console.log(this.heroes$);
+      if (value)
+        this.heroes$ = res.filter((hero) =>
+          hero.name.toLowerCase().includes(value)
+        );
+      else this.heroes$ = null;
     });
   }
 }
