@@ -19,7 +19,7 @@ export class HeroSearchComponent implements OnInit {
     this.heroService.getData().subscribe((res) => {
       if (value)
         this.heroes$ = res.filter((hero) =>
-          hero.name.toLowerCase().includes(value)
+          hero.name.toLowerCase().includes(value.toLowerCase())
         );
       else this.heroes$ = null;
     });
